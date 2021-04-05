@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Statistics by country</title>
+
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+    .header{
+        position:sticky;
+        top: 0 ;
+    }
+    
+    body {
+	  background-image: url('sources/med_background.png');
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  background-size: cover;
+	}
+	
+	#myBtn {
+	  display: none;
+	  position: fixed;
+	  bottom: 20px;
+	  right: 30px;
+	  z-index: 99;
+	  font-size: 18px;
+	  border: none;
+	  outline: none;
+	  background-color: red;
+	  color: white;
+	  cursor: pointer;
+	  padding: 15px;
+	  border-radius: 4px;
+	}
+
+	#myBtn:hover {
+	  background-color: #555;
+	}
+    
+</style>
+
+</head>
+<body onload="countryNames();">
+	
+	<div style="background-color: rgb(211, 237, 235);">
+		<br><br>
+    	<h3 style="margin-left: 5px;"><strong>COVID-19 vaccination statistics by country</strong></h3>
+    </div>
+    
+    <br>
+    
+    <button id="backButton" type="button" class="btn btn-outline-secondary" style="position: sticky; top: 0; float: right; margin-right: 5px">Back to homepage</button>
+    
+    <label for="countryNamesList" style="margin-left: 5px;"> <b> Select country </b> </label> 
+	&nbsp;
+	<select id = "countryNamesList" style="font-style: italic; text-align: center;" onchange = "reportsByCountry();" >  
+		<option> - - - Country name - - - </option>
+	</select>
+	
+	<br><br>
+    
+    <table style="display: none;" id="table" border="1" class="table table-striped table-bordered">
+		<thead class="thead-dark">
+			<tr>
+				<th class="header" scope="col">Week of the year</th>
+				<th class="header" scope="col">First dose</th>
+				<th class="header" scope="col">Second dose</th>
+				<th class="header" scope="col">Vaccine</th>
+				<th class="header" scope="col">Doses received</th>
+				<th class="header" scope="col">Target group</th>
+			</tr>
+		</thead>
+		<tbody>
+								
+		</tbody>
+	</table>						
+
+	<div class="progress" id="progressBar" style="height:45px; display: none;">
+		<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width:100%;height:45px">Loading data...</div>
+	</div>
+	  
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Back to top</button>
+
+	<script type="text/javascript">
+       
+		function reportsByCountry() {
+			
+			var table = document.getElementById("table");
+			var progressBar = document.getElementById("progressBar");
+			var countryNamesList = document.getElementById("countryNamesList");  
+			var country = countryNamesList.options[countryNamesList.selectedIndex].text;
+			
+			if (progressBar.style.display === "none") {
+				progressBar.style.display = "block";
+        	}
+			
+			if (table.style.display === "block") {
+        		table.style.display = "none";
+        	}
+			
+            $.ajax({url : "http://localhost:8080/reportsByCountryName?countryName=" + country
+        }).then(function(data) {
+        	$("#table tbody tr").remove();
+        	
+        	if (table.style.display === "none") {
+        	    table.style.display = "block";
+        	}
+        	
+        	if (progressBar.style.display === "block") {
+				progressBar.style.display = "none";
+        	}
+        	
+        	tabBody = document.getElementsByTagName("tbody").item(0);
+        	
+        	for (i = 0; i < data.length; i++) {
+        		
+	            row = document.createElement("tr");
+	            
+	            cell1 = document.createElement("td");
+	            cell2 = document.createElement("td");
+	            cell3 = document.createElement("td");
+	            cell4 = document.createElement("td");
+	            cell5 = document.createElement("td");
+	            cell6 = document.createElement("td");
+	            
+	            textnode1 = document.createTextNode(data[i].YearWeekISO);
+	            textnode2 = document.createTextNode(data[i].FirstDose);
+	            textnode3 = document.createTextNode(data[i].SecondDose);
+	            textnode4 = document.createTextNode(data[i].Vaccine);
+	            textnode5 = document.createTextNode(data[i].NumberDosesReceived);
+	            textnode6 = document.createTextNode(data[i].TargetGroup);
+	            
+	            cell1.appendChild(textnode1);
+	            cell2.appendChild(textnode2);
+	            cell3.appendChild(textnode3);
+	            cell4.appendChild(textnode4);
+	            cell5.appendChild(textnode5);
+	            cell6.appendChild(textnode6);
+	            
+	            row.appendChild(cell1);
+	            row.appendChild(cell2);
+	            row.appendChild(cell3);
+	            row.appendChild(cell4);
+	            row.appendChild(cell5);
+	            row.appendChild(cell6);
+	            
+	            tabBody.appendChild(row);
+        	}
+		}); 
+        }
+		
+		function countryNames() {
+			
+			var countryNames = [];
+			
+			$(document).ready(function() {
+			    $.ajax({
+			        url: "http://localhost:8080/countryNames"
+			    }).then(function(data) {
+			    	
+			    	$.each(data, function(index, item) {
+			    		countryNames.push(item);
+			    	})
+			    	for (var i = 0; i < countryNames.length; i++) {
+					    var option = document.createElement("option");
+					    option.value = countryNames[i];
+					    option.text = countryNames[i];
+					    countryNamesList.appendChild(option);
+					}
+			    });
+			});
+		}
+		
+		document.getElementById("backButton").onclick = function () {
+	        location.href = "welcomePage.html";
+	    };
+	    
+	  	//Get the button
+	    var mybutton = document.getElementById("myBtn");
+
+	    // When the user scrolls down 20px from the top of the document, show the button
+	    window.onscroll = function() {scrollFunction()};
+
+	    function scrollFunction() {
+	      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	        mybutton.style.display = "block";
+	      } else {
+	        mybutton.style.display = "none";
+	      }
+	    }
+
+	    // When the user clicks on the button, scroll to the top of the document
+	    function topFunction() {
+	      document.body.scrollTop = 0;
+	      document.documentElement.scrollTop = 0;
+	    }
+		
+	</script>
+</body>
+</html>

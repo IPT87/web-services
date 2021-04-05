@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>EU countries vaccination</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+	body {
+	  background-image: url('sources/europe-map.png');
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  background-size: cover;
+	}
+</style>
+
+</head>
+<body onload="getEuCitizensVaccinated();">
+
+	<div style="background-color: rgb(211, 237, 235);">
+		<br><br>
+    	<h3 style="margin-left: 5px;"><strong>COVID-19 vaccination in EU</strong></h3>
+    	<h6 style="text-align: right; margin-right: 5px;"><em>Last updated:</em> <strong id="last-updated"></strong></h6>
+    	<h6 style="text-align: right; margin-right: 5px;"><span id='date-time'> / / : : </span></h6>
+    </div>
+
+	<br><br>
+
+	<div>
+		<h3 style="margin-left: 5px;">By now <em><strong id="euCitizensVaccinated"></strong></em> of the EU citizens have received vaccination.</h3>
+	</div>
+
+	<div style="position: absolute; top: 50%; width: 100%;">
+		<img src="sources/flag.png" height="140px" width="140px" style="position: relative; left: 7%;">
+		<img src="sources/covid-vaccine.png" height="150px" width="140px" style="position: relative; left: 20%;">
+		<img src="sources/info.gif" height="140px" width="140px" style="position: relative; left: 37%;">
+		<img src="sources/fpercentage.png" height="140px" width="140px" style="position: relative; left: 53%;">
+	</div>
+
+	<div style="position: absolute; top: 75%; width: 100%;">
+		<button id="dataByCountry" type="button" class="btn btn-outline-secondary" style="position: relative; left: 6%;">View data</button>
+		<button id="dataByCountryAndVaccine" type="button" class="btn btn-outline-secondary" style="position: relative; left: 24%;">View data</button>
+		<button id="vaccinesInfo" type="button" class="btn btn-outline-secondary" style="position: relative; left: 44%">View data</button>
+		<button id="citizensInfo" type="button" class="btn btn-outline-secondary" style="position: relative; left: 63%">View data</button>
+	</div>
+
+	<br>
+
+	<div style="position: absolute; top: 85%;">
+		<h5 style="position: relative; left: 2%; float: left;">All reports by country name.</h5>
+		<h5 style="position: relative; left: 9%; float: left;">All reports by country name and vaccine.</h5>
+		<h5 style="position: relative; left: 15%; float: left;">Information about the vaccines.</h5>
+		<h5 style="position: relative; left: 27%; float: right;">Population vaccinated.</h5>
+	</div>
+
+	<script type="text/javascript">
+	
+		window.setInterval(function(){
+	    	var today = new Date();
+		    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+		    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		    var dateTime = date + ' ' + time;
+		    document.getElementById('date-time').innerHTML = dateTime;
+		}, 1000);
+		
+		function getEuCitizensVaccinated() {
+			
+			var today = new Date();
+			var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+			document.getElementById('last-updated').innerHTML = date;
+			
+			window.setInterval(function(){
+				var today = new Date();
+			    date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+			    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+			    var dateTime = date + ' ' + time;
+			    document.getElementById('date-time').innerHTML = dateTime;
+			}, 1);
+			
+			$(document).ready(function() {
+			    $.ajax({
+			        url: "http://localhost:8080/populationEuVaccinated"
+			    }).then(function(data) {
+			    	document.getElementById("euCitizensVaccinated").innerHTML = data.toFixed(2) + "%";
+			    });
+			});
+		}
+		
+		document.getElementById("dataByCountry").onclick = function () {
+	        location.href = "statisticsByCountry.html";
+	    };
+	    
+	    document.getElementById("dataByCountryAndVaccine").onclick = function () {
+	        location.href = "statisticsByCountryAndVaccine.html";
+	    };
+	    
+	    document.getElementById("vaccinesInfo").onclick = function () {
+	        location.href = "vaccinesInfo.html";
+	    };
+
+		document.getElementById("citizensInfo").onclick = function () {
+	        location.href = "citizensVaccinated.html";
+	    };
+	
+	</script>
+
+</body>
+</html>

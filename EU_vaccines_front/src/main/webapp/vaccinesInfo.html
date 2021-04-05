@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Information about the vaccines</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+	#myBtn {
+	  display: none;
+	  position: fixed;
+	  bottom: 20px;
+	  right: 30px;
+	  z-index: 99;
+	  font-size: 18px;
+	  border: none;
+	  outline: none;
+	  background-color: red;
+	  color: white;
+	  cursor: pointer;
+	  padding: 15px;
+	  border-radius: 4px;
+	}
+
+	#myBtn:hover {
+	  background-color: #555;
+	}
+	
+</style>
+
+</head>
+<body>
+
+	<div style="background-color: rgb(211, 237, 235);">
+		<br><br>
+    	<h3 style="margin-left: 5px;"><em><strong>COVID-19 vaccines information</strong></em></h3>
+    </div>
+	
+	<br>
+	
+	<button id="backButton" type="button" class="btn btn-outline-secondary" style="position: sticky; top: 0; float: right; margin-right: 5px;">Back to homepage</button>
+	
+	<br><br><br>
+	
+	<div style="margin-left: 15px; margin-bottom: 2ch; border: solid; border-radius: 1ch; border-color: dimgrey;">
+		<div style="padding: 1ch;">
+			<h1>Pfizer-BioNTech COVID-19 Vaccine</h1>
+			<br>
+			<h2>General information</h2>
+			<p><strong>Name:</strong> BNT162b2</p>
+			<p><strong>Manufacturer:</strong> Pfizer, Inc., and BioNTech</p>
+			<p><strong>Type of vaccine:</strong> mRNA</p>
+			<p><strong>Number of shots:</strong> 2 shots, 21 days apart</p>
+			<p><strong>How given:</strong> Shot in the muscle of the upper arm</p>
+			<p><strong>Does not contain:</strong></p>
+			<ul>
+				<li>Eggs</li>
+				<li>Preservatives</li>
+				<li>Latex</li>
+			</ul>
+			<div class="card-header h2 bg-info">Who should get vaccinated</div>
+			<ul>
+				<li>The Pfizer-BioNTech vaccine is recommended for people aged 16 years and older.</li>
+			</ul>
+			<div class="card-header h2 bg-warning">Who should not get vaccinated</div>
+			<ul>
+				<li>If you have had a severe allergic reaction (anaphylaxis) or an immediate allergic reaction-even 
+				if it was not severe-to any ingredient in an mRNA COVID-19 vaccine 
+				(such as polyethylene glycol), you should not get an mRNA COVID-19 vaccine.</li>
+				<li>If you have had a severe allergic reaction (anaphylaxis) or an immediate allergic reaction-even 
+				if it was not severe-after getting the first dose of the vaccine, you should not get a second dose 
+				of either of the mRNA COVID-19 vaccines.</li>
+				<li>An allergic reaction is considered severe when a person needs to be treated with epinephrine or 
+				EpiPen© or if they must go to the hospital. Learn about common side effects of COVID-19 vaccines and when to call a doctor.</li>
+				<li>An immediate allergic reaction means a reaction within 4 hours of getting vaccinated, including symptoms such as hives, 
+				swelling, or wheezing (respiratory distress).</li>
+			</ul>
+			<p>If you aren't able to get an mRNA COVID-19 vaccine, you may still be able to get a different type of COVID-19 vaccine.</p>
+			<h2>Side effects</h2>
+			<h4>Common side effects</h4>
+			<table class="table nein-scroll table-bordered">
+				<thead>
+					<tr>
+					<th>In the arm where you got the shot:</th>
+					<th>Throughout the rest of your body:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<ul>
+								<li>Pain</li>
+								<li>Redness</li>
+								<li>Swelling</li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li>Tiredness</li>
+								<li>Headache</li>
+								<li>Muscle pain</li>
+								<li>Chills</li>
+								<li>Fever</li>
+								<li>Nausea</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>These side effects usually start within a day or two of getting the vaccine.
+			Side effects might affect your ability to do daily activities, but they should go away in a few days.</p>
+			<h2>Summary of safety data</h2>
+			<ul>
+				<li>In clinical trials, reactogenicity symptoms (side effects that happen within 7 days of getting vaccinated) were common but were mostly mild to moderate.</li>
+				<li>Side effects (such as fever, chills, tiredness, and headache) throughout the body were more common after the second dose of the vaccine.</li>
+				<li>Most side effects were mild to moderate. However, a small number of people had severe side effects—defined as side effects affecting a person's ability to do daily activities.</li>
+				<li>Although few people in the clinical trials went to the hospital or died, data suggest that people who got the Pfizer-BioNTech vaccine were less likely to have these more serious outcomes compared to people who got the saline placebo.</li>
+				<li>CDC will continue to provide updates as we learn more about the safety of the Pfizer-BioNTech vaccine in real-world conditions.</li>
+			</ul>
+			<h2>Information on how well the vaccine works</h2>
+			<ul>
+				<li>Based on evidence from clinical trials, the Pfizer-BioNTech vaccine was 95% effective at preventing laboratory-confirmed COVID-19 illness in people without evidence of previous infection.</li>
+				<li>CDC will continue to provide updates as we learn more about how well the Pfizer-BioNTech vaccine works in real-world conditions.</li>
+			</ul>
+			<h2>Demographic information from clinical trials</h2>
+			<p>Phase 2 and 3 clinical trials for the Pfizer-BioNTech vaccine included people from the following racial and ethnic categories:</p>
+			<ul>
+				<li>81.9% White</li>
+				<li>26.2% Hispanic/Latino</li>
+				<li>9.8% African American</li>
+				<li>4.4% Asian</li>
+				<li><3% other races/ethnicities</li>
+			</ul>
+			<p>Age and sex breakdown:</p>
+			<ul>
+				<li>50.6% male</li>
+				<li>49.4% female</li>
+				<li>21.4% 65 years and older</li>
+			</ul>
+			<p>The most frequent underlying medical conditions were obesity (35.1%), diabetes (8.4%), and pulmonary disease (7.8%).</p>
+		</div>
+	</div>
+
+	<div style="margin-left: 15px; margin-bottom: 2ch; border: solid; border-radius: 1ch; border-color: dimgrey;">
+		<div style="padding: 1ch;">
+			<h1>Moderna COVID-19 Vaccine</h1>
+			<br>
+			<h2>General information</h2>
+			<p><strong>Name:</strong> mRNA-1273</p>
+			<p><strong>Manufacturer:</strong> ModernaTX, Inc.</p>
+			<p><strong>Type of vaccine:</strong> mRNA</p>
+			<p><strong>Number of shots:</strong> 2 shots, one month (28 days) apart</p>
+			<p><strong>How given:</strong> Shot in the muscle of the upper arm</p>
+			<p><strong>Does not contain:</strong></p>
+			<ul>
+				<li>Eggs</li>
+				<li>Preservatives</li>
+				<li>Latex</li>
+			</ul>
+			<div class="card-header h2 bg-info">Who should get vaccinated</div>
+			<ul>
+				<li>The Moderna vaccine is recommended for people aged 18 years and older.</li>
+			</ul>
+			<div class="card-header h2 bg-warning">Who should not get vaccinated</div>
+			<ul>
+				<li>If you have had a severe allergic reaction (anaphylaxis) or an immediate allergic reaction-even 
+				if it was not severe-to any ingredient in an mRNA COVID-19 vaccine 
+				(such as polyethylene glycol), you should not get an mRNA COVID-19 vaccine.</li>
+				<li>If you have had a severe allergic reaction (anaphylaxis) or an immediate allergic reaction-even 
+				if it was not severe-after getting the first dose of the vaccine, you should not get a second dose 
+				of either of the mRNA COVID-19 vaccines.</li>
+				<li>An allergic reaction is considered severe when a person needs to be treated with epinephrine or 
+				EpiPen© or if they must go to the hospital. Learn about common side effects of COVID-19 vaccines and when to call a doctor.</li>
+				<li>An immediate allergic reaction means a reaction within 4 hours of getting vaccinated, including symptoms such as hives, 
+				swelling, or wheezing (respiratory distress).</li>
+			</ul>
+			<p>If you aren't able to get an mRNA COVID-19 vaccine, you may still be able to get a different type of COVID-19 vaccine.</p>
+			<h2>Side effects</h2>
+			<h4>Common side effects</h4>
+			<table class="table nein-scroll table-bordered">
+				<thead>
+					<tr>
+					<th>In the arm where you got the shot:</th>
+					<th>Throughout the rest of your body:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<ul>
+								<li>Pain</li>
+								<li>Redness</li>
+								<li>Swelling</li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li>Tiredness</li>
+								<li>Headache</li>
+								<li>Muscle pain</li>
+								<li>Chills</li>
+								<li>Fever</li>
+								<li>Nausea</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>These side effects usually start within a day or two of getting the vaccine.
+			Side effects might affect your ability to do daily activities, but they should go away in a few days.</p>
+			<h2>Summary of safety data</h2>
+			<ul>
+				<li>In clinical trials, reactogenicity symptoms (side effects that happen within 7 days of getting vaccinated) were common but were mostly mild to moderate.</li>
+				<li>Side effects (such as fever, chills, tiredness, and headache) throughout the body were more common after the second dose of the vaccine.</li>
+				<li>Most side effects were mild to moderate. However, a small number of people had severe side effects—defined as side effects affecting a person's ability to do daily activities.</li>
+				<li>Although few people in the clinical trials went to the hospital or died, data suggest that people who got the Pfizer-BioNTech vaccine were less likely to have these more serious outcomes compared to people who got the saline placebo.</li>
+				<li>CDC will continue to provide updates as we learn more about the safety of the Pfizer-BioNTech vaccine in real-world conditions.</li>
+			</ul>
+			<h2>Information on how well the vaccine works</h2>
+			<ul>
+				<li>Based on evidence from clinical trials, the Moderna vaccine was 94.1% effective at preventing laboratory-confirmed COVID-19 illness in people who received two doses who had no evidence of being previously infected.</li>
+				<li>The vaccine appeared to have high effectiveness in clinical trials (efficacy) among people of diverse age, sex, race, and ethnicity categories and among persons with underlying medical conditions.</li>
+				<li>Although few people in the clinical trials were admitted to the hospital, this happened less often in the people who got the Moderna vaccine compared to people who got the saline placebo.</li>
+				<li>CDC will continue to provide updates as we learn more about how well the Moderna vaccine works in real-world conditions.</li>
+			</ul>
+			<h2>Demographic information from clinical trials</h2>
+			<p>Phase 2 and 3 clinical trials for the Moderna vaccine included people from the following racial and ethnic categories:</p>
+			<ul>
+				<li>79.4% White</li>
+				<li>20% Hispanic/Latino</li>
+				<li>9.7% African American</li>
+				<li>4.7% Asian</li>
+				<li><3% other races/ethnicities</li>
+			</ul>
+			<p>Age and sex breakdown:</p>
+			<ul>
+				<li>52.6% male</li>
+				<li>47.4% female</li>
+				<li>25.3% 65 years and older</li>
+			</ul>
+			<p>Most people who participated in the trials (82%) were considered to have an occupational risk of exposure, with 25.4% of them being healthcare workers.</p>
+			<p>Among people who participated in the clinical trials, 22.3% had at least one high-risk condition, which included lung disease, heart disease, obesity, diabetes, liver disease, or HIV infection. Four percent (4%) of participants had two or more high-risk conditions.</p>
+		</div>
+	</div>
+
+	<div style="margin-left: 15px; margin-bottom: 2ch; border: solid; border-radius: 1ch; border-color: dimgrey;">
+		<div style="padding: 1ch;">
+			<h1>CoronaVac COVID-19 Vaccine</h1>
+			<br>
+			<h2>General information</h2>
+			<p><strong>Name:</strong> Sinovac COVID-19 vaccine</p>
+			<p><strong>Manufacturer:</strong> Sinovac Biotech</p>
+			<p><strong>Type of vaccine:</strong> inactivated vaccine</p>
+			<p><strong>Number of shots:</strong> 2 shots</p>
+			<p><strong>How given:</strong> Shot in the muscle of the upper arm</p>
+			<h2>Side effects</h2>
+			<h4>Common side effects</h4>
+			<table class="table nein-scroll table-bordered">
+				<thead>
+					<tr>
+					<th>In the arm where you got the shot:</th>
+					<th>Throughout the rest of your body:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<ul>
+								<li>Pain</li>
+								<li>Redness</li>
+								<li>Swelling</li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li>Tiredness</li>
+								<li>Headache</li>
+								<li>Muscle pain</li>
+								<li>Chills</li>
+								<li>Fever</li>
+								<li>Nausea</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>These side effects usually start within a day or two of getting the vaccine.
+			Side effects might affect your ability to do daily activities, but they should go away in a few days.</p>
+			<h2>Summary of safety data</h2>
+			<ul>
+				<li>Officials said the lowered figure of 50.4% included "very light" cases of COVID-19 among participants omitted in the earlier analysis. Ricardo Palácios, Medical Director of Instituto Butantan said Sinovac's relatively low efficacy rate of 50% was due to more rigorous standards for what counts as an infection among trial participants. The Institute included six types of cases in its results: asymptomatic, very mild, mild, two levels of moderate, and severe, while western vaccine makers generally included only mild, moderate, and severe categories. Brazil's trial was also largely made up of frontline health care workers. "They are more exposed to the virus and may explain the relatively low efficacy rate," said Yanzhong Huang, a senior fellow for global health at the Council on Foreign Relations.</li>
+				<li>The release of more definitive data on CoronaVac's efficacy was delayed because Sinovac needed to reconcile results from different trials using varying protocols. According to Instituto Butantan director Dimas Covas, the Brazilian group was considered more vulnerable to infection and exposure to higher viral loads. In Turkish and Indonesian Phase III trials, the composition of volunteers was similar to that of the general population.</li>
+			</ul>
+			<h2>Information on how well the vaccine works</h2>
+			<ul>
+				<li>In May, CoronaVac began Phase I-II trials in China on adults over the age 60, and in September CoronaVac began Phase I-II trials in China on children ages 3-17. Phase II results for older adults published in The Lancet showed CoronaVac was safe and well tolerated in older adults, with neutralising antibody induced by a 3 μg dose were similar to those of a 6 μg dose</li>
+				<li>In a Phase II clinical trial completed in July 2020 and published in The Lancet, CoronaVac showed seroconversion of neutralising antibodies for 109 (92%) of 118 participants in the 3 μg group, 117 (98%) of 119 in the 6 μg group, after the days 0 and 14 schedule; whereas at day 28 after the days 0 and 28 schedule, seroconversion was seen in 114 (97%) of 117 in the 3 μg group, 118 (100%) of 118 in the 6 μg group.</li>
+				<li>In late July 2020, Sinovac began conducting a Phase III vaccine trial to evaluate efficacy and safety on 9,000 volunteer healthcare professionals in Brazil, collaborating with Butantan Institute.</li>
+			</ul>
+		</div>
+	</div>
+
+	<div style="margin-left: 15px; margin-bottom: 2ch; border: solid; border-radius: 1ch; border-color: dimgrey;">
+		<div style="padding: 1ch;">
+			<h1>CNBG/Sinopharm COVID-19 Vaccine</h1>
+			<br>
+			<h2>General information</h2>
+			<p><strong>Name:</strong> BBIBP-CorV</p>
+			<p><strong>Manufacturer:</strong> China National Biotec Group (CNBG)</p>
+			<p><strong>Type of vaccine:</strong> mRNA</p>
+			<p><strong>Number of shots:</strong> 2 shots</p>
+			<p><strong>How given:</strong> Shot in the muscle of the upper arm</p>
+			
+			<p>These side effects usually start within a day or two of getting the vaccine.
+			Side effects might affect your ability to do daily activities, but they should go away in a few days.</p>
+			<h2>Summary of safety data</h2>
+			<ul>
+				<li>CNBG has yet to provide more details on the data.</li>
+				<li>The company initiated phase III trials in the United Arab Emirates (UAE), Peru, Bahrain, Egypt, Jordan and Argentina, involving 69,000 volunteers with 125 nationalities.</li>
+			</ul>
+			<h2>Information on how well the vaccine works</h2>
+			<ul>
+				<li>Volunteers who received the vaccine in the phase III experiment, which is being developed by CNBG's subsidiary Beijing Institute of Biological Products Co. Ltd., produced high-tier antibodies, with a neutralizing antibody positive conversion rate of 99.52% after two doses, the company said. CNBG is a subsidiary of China National Pharmaceutical Group Corp.</li>
+				<li>The 79.34% rate meets the requirements set by the World Health Organization (WHO) as well as China's National Medical Products Administration's (NMPA) minimum standard of 50% efficacy set for approval of COVID-19 vaccines, although the NMPA advised in August that the efficacy rate should be above 70%.</li>
+			</ul>
+			
+		</div>
+	</div>
+
+	<div style="margin-left: 15px; margin-bottom: 2ch; border: solid; border-radius: 1ch; border-color: dimgrey;">
+		<div style="padding: 1ch;">
+			<h1>Oxford-AstraZeneca COVID-19 Vaccine</h1>
+			<br>
+			<h2>General information</h2>
+			<p><strong>Name:</strong> AZD1222</p>
+			<p><strong>Manufacturer:</strong> Oxford University-AstraZeneca</p>
+			<p><strong>Type of vaccine:</strong> mRNA</p>
+			<p><strong>Number of shots:</strong> 2 shots</p>
+			<p><strong>How given:</strong> Shot in the muscle of the upper arm</p>
+			
+			<p>These side effects usually start within a day or two of getting the vaccine.
+			Side effects might affect your ability to do daily activities, but they should go away in a few days.</p>
+			<h2>Summary of safety data</h2>
+			<ul>
+				<li>The vaccine has a good safety profile; though more than 10% of recipients during clinical trials reported mild adverse effects including injection site pain, headache and nausea; all generally resolving within a few days.</li>
+				<li>More rarely, anaphylaxis may occur (the UK Medicines and Healthcare products Regulatory Agency (MHRA) has 234 reports out of approximately 11.7 million vaccinations as of 7 March 2021).</li>
+			</ul>
+			<h2>Information on how well the vaccine works</h2>
+			<ul>
+				<li>In March 2021, a number of countries paused use of the vaccine out of fears it may be implicated in cases of blood clotting observed in vaccine recipients. The EMA updated the vaccine information to inform patients about the remote possibility of such syndromes but confirmed that the vaccine is not associated with an increase in the overall risk of blood clots and that the vaccine's benefits still outweigh the risks. After the EMA's statement European countries resumed their AstraZeneca inoculations.</li>
+			</ul>
+			
+		</div>
+	</div>
+
+	<div style="margin-left: 15px; margin-bottom: 2ch; border: solid; border-radius: 1ch; border-color: dimgrey;">
+		<div style="padding: 1ch;">
+			<h1>Sputnik V COVID-19 Vaccine</h1>
+			<br>
+			<h2>General information</h2>
+			<p><strong>Name:</strong> Gam-COVID-Vac</p>
+			<p><strong>Manufacturer:</strong> Gamaleya Research Institute of Epidemiology and Microbiology</p>
+			<p><strong>Type of vaccine:</strong> two-vector vaccine</p>
+			<p><strong>Number of shots:</strong> 2 shots</p>
+			<p><strong>How given:</strong> Shot in the muscle of the upper arm</p>
+			
+			<p>These side effects usually start within a day or two of getting the vaccine.
+			Side effects might affect your ability to do daily activities, but they should go away in a few days.</p>
+			<h2>Summary of safety data</h2>
+			<ul>
+				<li>On 2 February 2021, an interim analysis from the Moscow trial was published in The Lancet, indicating 91.6% efficacy (95% CI 85.6–95.2) after the second vaccination, without unusual side effects. The trial started on 7 September 2020 using the frozen liquid form of the vaccine, and data was analysed up to the second database lock on 24 November 2020. The over-60-years-old group in the trial (oldest participant was 87) had essentially the same efficacy (91.8%) as for all ages. The lowest age participants were 18 years old.</li>
+			</ul>
+			<h2>Information on how well the vaccine works</h2>
+			<ul>
+				<li>The study program will last 6 months in several countries, and it is planned to involve 100 volunteers in each study program. On 9 February 2021, the Ministry of Health of the Republic of Azerbaijan allowed clinical studies in the country for the combined use of the Sputnik V vaccine.</li>
+			</ul>
+			
+		</div>
+	</div>
+	
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Back to top</button>
+	
+	<script type="text/javascript">
+	
+		document.getElementById("backButton").onclick = function () {
+	        location.href = "welcomePage.html";
+	    };
+	    
+	  	//Get the button
+	    var mybutton = document.getElementById("myBtn");
+
+	    // When the user scrolls down 20px from the top of the document, show the button
+	    window.onscroll = function() {scrollFunction()};
+
+	    function scrollFunction() {
+	      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	        mybutton.style.display = "block";
+	      } else {
+	        mybutton.style.display = "none";
+	      }
+	    }
+
+	    // When the user clicks on the button, scroll to the top of the document
+	    function topFunction() {
+	      document.body.scrollTop = 0;
+	      document.documentElement.scrollTop = 0;
+	    }
+	    
+	</script>
+	
+</body>
+</html>

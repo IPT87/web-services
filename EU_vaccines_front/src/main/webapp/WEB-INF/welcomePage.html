@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>EU countries vaccination</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="getEuCitizensVaccinated();">
+
+	<div style="background-color: rgb(211, 237, 235);">
+		<br><br>
+    	<h3><strong>COVID-19 vaccination in EU</strong></h3>
+    </div>
+
+	<div id="euCitizensVaccinated">
+
+	</div>
+
+	<script type="text/javascript">
+		
+		function getEuCitizensVaccinated() {
+			
+			$(document).ready(function() {
+			    $.ajax({
+			        url: "http://localhost:8080/populationEuVaccinated"
+			    }).then(function(data) {
+			    	document.getElementById("euCitizensVaccinated").innerHTML = data.toFixed(2);
+			    });
+			});
+		}
+	
+	</script>
+
+</body>
+</html>

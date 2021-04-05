@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Citizens vaccinated</title>
+
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Chart JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
+<style type="text/css">
+	body {
+	  background-image: url('sources/percentBackground.png');
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  background-size: cover;
+	}
+</style>
+
+</head>
+<body onload="loadCountryAndVaccineNames();">
+
+	<div style="background-color: rgb(211, 237, 235);">
+		<br><br>
+    	<h3 style="margin-left: 5px;"><strong>Citizens vaccinated statistics by country</strong></h3>
+    </div>
+    
+    <br>
+    
+    <button id="backButton" type="button" class="btn btn-outline-secondary" style="position: sticky; top: 0; float: right; margin-right: 5px">Back to homepage</button>
+    
+    <label for="countryNamesList" style="margin-left: 5px;"> <b> Select country </b> </label> 
+	&nbsp;
+	<select id = "countryNamesList" style="font-style: italic; text-align: center;" >  
+		<option> - - - Country name - - - </option>
+	</select>
+	&nbsp;
+	<label for="vaccineNamesList" style="margin-left: 5px;"> <b> Select vaccine </b> </label> 
+	&nbsp;
+	<select id = "vaccineNamesList" style="font-style: italic; text-align: center;">  
+		<option> - - - Vaccine - - - </option>
+	</select>
+	&nbsp;
+	<button id="showStats" type="button" class="btn btn-outline-secondary">Show statistics</button>
+	
+	<br><br>
+	
+	<div id="graphContainer" style="position: absolute; height: 850px; width: 850px;">
+			<canvas id="pieChartByVaccine"></canvas>
+	</div>
+		
+	<div id="graphContainer1" style="position: absolute; height: 850px; width: 850px; margin-left: 650px;">
+			<canvas id="pieChartPercentVaccinated"></canvas>
+	</div>				
+
+	<div class="progress" id="progressBar" style="height:45px; display: none;">
+		<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width:100%;height:45px">Loading data...</div>
+	</div>
+	
+	<script type="text/javascript">
+	
+	function loadCountryAndVaccineNames() {
+		countryNames();
+		vaccineNames();
+	}
+	
+	function chartByVaccine(vaccine, populationVaccinatedByVaccine, populationTotal) {
+		
+		var ctx = document.getElementById('pieChartByVaccine').getContext('2d');
+		var countryNamesList = document.getElementById("countryNamesList");  
+		var country = countryNamesList.options[countryNamesList.selectedIndex].text;
+		
+		/*if(window.chartJS instanceof Chart)
+		{
+		    window.chartJS.destroy();
+		}*/
+		chartJS = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		      labels: ['Persons vaccinated with ' + vaccine + " vaccine", 'Rest of the population'],
+		      datasets: [
+		        {
+		          data: [populationVaccinatedByVaccine, populationTotal - populationVaccinatedByVaccine],
+		          backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)']
+		        }
+		      ]
+		    },
+		    options: {
+		    	responsive: true,
+		    	maintainAspectRatio: true,
+		    	plugins: {
+		    	      datalabels: {
+		    	        display: true,
+		    	        align: 'bottom',
+		    	        backgroundColor: '#ccc',
+		    	        borderRadius: 6,
+		    	        font: {
+		    	          size: 16,
+		    	        }
+		    	      },
+		    	    },
+		        legend: { display: true },
+			      title: {
+			        display: true,
+			        position: "bottom",
+			        text: 'Population of ' + country + ": " + populationTotal
+			      }
+		      }
+		});
+		
+	}
+	
+	function chartByPercentVaccine(vaccine, percentCitizensVaccinatedByVaccine, restPopulationVaccinated) {
+		
+		var ctx = document.getElementById('pieChartPercentVaccinated').getContext('2d');
+		var countryNamesList = document.getElementById("countryNamesList");  
+		var country = countryNamesList.options[countryNamesList.selectedIndex].text;
+		
+		/*if (window.chartJS1 instanceof Chart)
+		{
+		    window.chartJS1.destroy();
+		}*/
+		chartJS1 = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		      labels: ['Percent of population vaccinated with ' + vaccine + " vaccine", 'Rest of the population vaccinated'],
+		      datasets: [
+		        {
+		          data: [percentCitizensVaccinatedByVaccine, restPopulationVaccinated],
+		          backgroundColor: ['rgb(6, 189, 91)', 'rgb(55, 114, 204)']
+		        }
+		      ]
+		    },
+		    options: {
+		    	plugins: {
+		    	      datalabels: {
+		    	    	formatter: (value) => {
+		    	          return value + '%';
+		    	        },
+		    	        display: true,
+		    	        align: 'bottom',
+		    	        backgroundColor: '#ccc',
+		    	        borderRadius: 6,
+		    	        font: {
+		    	          size: 16,
+		    	        }
+		    	      },
+		    	    },
+		        legend: { display: true },
+			      title: {
+			        display: true,
+			        position: "bottom",
+			        text: 'All persons vaccinated in ' + country
+			      }
+		      }
+		});
+		
+	}
+	
+	function reportsByCountryAndVaccine() {
+		
+		var countryNamesList = document.getElementById("countryNamesList");  
+		var country = countryNamesList.options[countryNamesList.selectedIndex].text;
+		var vaccineNamesList = document.getElementById("vaccineNamesList");  
+		var vaccine = vaccineNamesList.options[vaccineNamesList.selectedIndex].text;
+		
+		if (country !== "- - - Country name - - -" && vaccine !== "- - - Vaccine - - -") {
+		
+			var populationVaccinated = [];
+			var populationTotal = [];
+			var percentCitizensVaccinatedByVaccine = [];
+			var restPopulationVaccinated = [];
+			var table = document.getElementById("graphContainer");
+			var progressBar = document.getElementById("progressBar");
+			
+			if (window.chartJS instanceof Chart && window.chartJS1 instanceof Chart) {
+		    	window.chartJS.destroy();
+				window.chartJS1.destroy();
+	    	}
+			
+			if (progressBar.style.display === "none") {
+				progressBar.style.display = "block";
+	    	}
+			
+	        $.ajax({url : "http://localhost:8080/citizensVaccinated?countryName=" + country + "&vaccine=" + vaccine
+	    	}).then(function(data) {
+	    		
+	    	if (progressBar.style.display === "block") {
+				progressBar.style.display = "none";
+	    	}
+	    	
+	    	restPopulationVaccinated.push(data.totalVaccinated - data.percentCitizensVaccinatedByVaccine);
+	    	populationVaccinated.push(data.populationVaccinatedByVaccine);
+	    	populationTotal.push(data.population);
+	    	percentCitizensVaccinatedByVaccine.push(data.percentCitizensVaccinatedByVaccine);
+	    	percentCitizensVaccinatedByVaccine = percentCitizensVaccinatedByVaccine + " ";
+	    	percentCitizensVaccinatedByVaccine = percentCitizensVaccinatedByVaccine.substring(0, 4);
+	    	restPopulationVaccinated = restPopulationVaccinated + " ";
+	    	restPopulationVaccinated = restPopulationVaccinated.substring(0, 4);
+	    	
+	    	chartByVaccine(vaccine, populationVaccinated, populationTotal);
+	    	chartByPercentVaccine(vaccine, percentCitizensVaccinatedByVaccine, restPopulationVaccinated);
+	
+		});
+		} else {
+			alert("You have to choose country and vaccine!");
+		}
+    }
+	
+	function countryNames() {
+		
+		var countryNames = [];
+		
+		$(document).ready(function() {
+		    $.ajax({
+		        url: "http://localhost:8080/countryNames"
+		    }).then(function(data) {
+		    	
+		    	$.each(data, function(index, item) {
+		    		countryNames.push(item);
+		    	})
+		    	for (var i = 0; i < countryNames.length; i++) {
+				    var option = document.createElement("option");
+				    option.value = countryNames[i];
+				    option.text = countryNames[i];
+				    countryNamesList.appendChild(option);
+				}
+		    });
+		});
+	}
+	
+	function vaccineNames() {
+		
+		var vaccineNames = [];
+		
+		$(document).ready(function() {
+		    $.ajax({
+		        url: "http://localhost:8080/vaccineNames"
+		    }).then(function(data) {
+		    	
+		    	$.each(data, function(index, item) {
+		    		vaccineNames.push(item);
+		    	})
+		    	for (var i = 0; i < vaccineNames.length; i++) {
+				    var option = document.createElement("option");
+				    option.value = vaccineNames[i];
+				    option.text = vaccineNames[i];
+				    vaccineNamesList.appendChild(option);
+				}
+		    });
+		});
+	}
+	
+	function citizensVaccinated() {
+		
+		var countryNamesList = document.getElementById("countryNamesList");  
+		var country = countryNamesList.options[countryNamesList.selectedIndex].text;
+		
+		$(document).ready(function() {
+		    $.ajax({
+		        url: "http://localhost:8080/populationVaccinated?countryName=" + country
+		    }).then(function(data) {
+		    	document.getElementById("citizensVaccinated").innerHTML = data.toFixed(2) + "%";
+		    	document.getElementById("countryName").innerHTML = country;
+		    	reportsByCountry();
+		    });
+		});
+		
+	}
+	
+	document.getElementById("showStats").onclick = function () {
+		reportsByCountryAndVaccine();
+    };
+	
+	document.getElementById("backButton").onclick = function () {
+        location.href = "welcomePage.html";
+    };
+    
+	</script>
+
+</body>
+</html>
