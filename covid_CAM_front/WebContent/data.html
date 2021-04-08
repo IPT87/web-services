@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Datos</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body onload="nombresMunicipios();">
+
+	<label for="listaMunicipios"> <b> Seleccione un municipio de la lista </b> </label> 
+	&nbsp;
+	<select id = "listaMunicipios" style="font-style: italic; text-align: center;" onchange = "todosMunicipios()" >  
+		<option> - - - Elige municipio - - - </option>
+	</select>
+	
+	<br><br>
+	
+	 <label for="fecha"> <b> Fecha </b> </label>
+	 &nbsp;
+	 <input type="date" id="fecha" name="fecha">
+	 <button id="ver_datos">Ver datos</button>
+	 
+	<div style="float: right;">
+		<button disabled="disabled" id="descargar_datos">Descargar datos</button>
+	</div>
+	
+	<div id="graph-container" style="width: 1850; height: 1850">
+		<canvas id="bar-chart"></canvas>
+	</div>
+	
+	<script type="text/javascript"> 
+	
+	window.chartJS;
+	var datosDescarga;
+	
+	$("#ver_datos").click(function(){
+		casosPorMunicipioFechaEntrada();
+		$("#descargar_datos").prop('disabled', false);
+	});
+	
+	$("#descargar_datos").click(function(){
+		descargarDatos();
+	});
+	
+	function descargarDatos() {
+		$.ajax({
+		    url: "http://localhost:8080/descargar_datos?municipio=" + datosDescarga.municipio_distrito + "&casosUltimos14Dias="
+		    		+ datosDescarga.casos_confirmados_ultimos_14dias + "&casosTotales=" + datosDescarga.casos_confirmados_totales + "&fechaInforme="
+		    		+ datosDescarga.fecha_informe
+		});
+		alert("Datos descargados");
+	}
+	
+	function casosPorMunicipioFechaEntrada() {
+		
+		var fecha = new Date($('#fecha').val());
+		fecha = fecha.toISOString();
+		var listaMunicipios = document.getElementById("listaMunicipios");  
+		var municipio_param = listaMunicipios.options[listaMunicipios.selectedIndex].text;
+		casosPorMunicipioFecha(municipio_param, fecha);
+		
+	}
+	
+	function todosMunicipios() {
+		
+		var listaMunicipios = document.getElementById("listaMunicipios");  
+		var municipio_param = listaMunicipios.options[listaMunicipios.selectedIndex].text;
+		datosMunicipio(municipio_param);
+		
+	}
+	
+	function casosPorMunicipioFecha(municipio_param, fecha) {
+		
+		var casos = [];
+		
+		$.ajax({
+		    url: "http://localhost:8080/municipio_fecha?municipio=" + municipio_param + "&fecha=" + fecha
+		}).then(function(data) {
+			casos.push(data.casos_confirmados_totales);
+			datosDescarga = data;
+	    	chartMunicipioFecha(data.fecha_informe, casos, data.municipio_distrito);	
+		}); 
+	}
+	
+	function nombresMunicipios() {
+		
+		var municipios = [];
+		
+		$(document).ready(function() {
+		    $.ajax({
+		        url: "http://localhost:8080/municipios"
+		    }).then(function(data) {
+		    	
+		    	$.each(data, function(index, item) {
+		    		municipios.push(item);
+		    	})
+		    	for (var i = 0; i < municipios.length; i++) {
+			    var opcion = document.createElement("option");
+			    opcion.value = municipios[i];
+			    opcion.text = municipios[i];
+			    listaMunicipios.appendChild(opcion);
+			}
+		    });
+		});
+	}
+	
+	function datosMunicipio(municipio_param) {
+		
+		var fechas = [];
+		var casos_totales = [];
+		var color = [];
+		var municipio;
+		
+		    $.ajax({
+		        url: "http://localhost:8080/informes_municipio?municipio=" + municipio_param
+		    }).then(function(data) {
+		    	municipio = data[0].municipio_distrito;
+		    	$.each(data, function(index, item) {
+		    		fechas.push(item.fecha_informe);
+		    		casos_totales.push(item.casos_confirmados_totales);
+		    		color.push(getRandomColor());
+		    	})
+		    	chart(fechas, casos_totales, municipio, color);
+		    });
+		
+	}
+		 
+	function chart(fechas, casos_totales, municipio, color) {
+		var ctx = document.getElementById('bar-chart').getContext('2d');
+		if(window.chartJS instanceof Chart)
+		{
+		    window.chartJS.destroy();
+		}
+		chartJS = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		      labels: fechas,
+		      datasets: [
+		        {
+		          label: "Casos",
+		          backgroundColor: "#bd777c",
+		          data: casos_totales
+		        }
+		      ]
+		    },
+		    options: {
+		      legend: { display: false },
+		      title: {
+		        display: true,
+		        text: 'Evolucion de casos positivos en ' + municipio
+		      }
+		    }
+		});
+		
+	}
+	
+	function chartMunicipioFecha(fecha, casos_totales, municipio) {
+		var ctx = document.getElementById('bar-chart').getContext('2d');
+		if(window.chartJS instanceof Chart)
+		{
+		    window.chartJS.destroy();
+		}
+		chartJS = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		      labels: fecha,
+		      datasets: [
+		        {
+		          label: "Casos",
+		          backgroundColor: "#575958",
+		          data: casos_totales
+		        }
+		      ]
+		    },
+		    options: {
+		      legend: { display: false },
+		      title: {
+		        display: true,
+		        text: 'Casos positivos en ' + municipio + ' ' + fecha
+		      }
+		    }
+		});
+		
+	}
+	
+	function getRandomColor() {
+		  var letters = '0123456789ABCDEF';
+		  var color = '#';
+		  for (var i = 0; i < 6; i++) {
+		    color += letters[Math.floor(Math.random() * 16)];
+		  }
+		  return color;
+		}
+	
+	</script>
+</body>
+</html>
