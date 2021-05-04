@@ -42,11 +42,15 @@ public class ReportServiceImpl implements ReportService {
 		
 		SetOfReports set = template.getForObject(url, SetOfReports.class);
 		
-		ArrayList<Report> reportsList = (ArrayList<Report>) Arrays.stream(set.getRecords())
-						.filter(r -> r.getCountryName().equalsIgnoreCase(Utilities.countryCode(countryName)))		
-						.collect(Collectors.toList());
-		
-		return Utilities.reportsViewForm(reportsList);
+		if (set != null) {
+			ArrayList<Report> reportsList = (ArrayList<Report>) Arrays.stream(set.getRecords())
+							.filter(r -> r.getCountryName().equalsIgnoreCase(Utilities.countryCode(countryName)))		
+							.collect(Collectors.toList());
+			
+			return Utilities.reportsViewForm(reportsList);
+		} else {
+			return new ArrayList<>();
+		}
 		
 	}
 
@@ -55,12 +59,16 @@ public class ReportServiceImpl implements ReportService {
 		
 		SetOfReports set = template.getForObject(url, SetOfReports.class);
 
-		ArrayList<Report> reportsList = (ArrayList<Report>) Arrays.stream(set.getRecords())
-									.filter(r -> r.getCountryName().equalsIgnoreCase(Utilities.countryCode(countryName)))
-									.filter(r -> r.getVaccine().equalsIgnoreCase(Utilities.vaccineCode(vaccine)))
-									.collect(Collectors.toList());
-		
-		return Utilities.reportsViewForm(reportsList);
+		if (set != null) {
+			ArrayList<Report> reportsList = (ArrayList<Report>) Arrays.stream(set.getRecords())
+										.filter(r -> r.getCountryName().equalsIgnoreCase(Utilities.countryCode(countryName)))
+										.filter(r -> r.getVaccine().equalsIgnoreCase(Utilities.vaccineCode(vaccine)))
+										.collect(Collectors.toList());
+			
+			return Utilities.reportsViewForm(reportsList);
+		} else {
+			return new ArrayList<>();
+		}
 		
 	}
 
@@ -74,7 +82,7 @@ public class ReportServiceImpl implements ReportService {
 						.collect(Collectors.toList());
 	}
 	
-	@Scheduled(cron = "0 0 12 * * ?")
+	@Scheduled(cron = "0 10 * * * ?")
 	@Override
 	public void addVaccineNamesInBD() {
 		
@@ -155,7 +163,7 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 	
-	@Scheduled(cron = "0 0 12 * * ?")
+	@Scheduled(cron = "0 10 * * * ?")
 	@Override
 	public void addCountriesNamesInBD() {
 		
@@ -183,12 +191,11 @@ public class ReportServiceImpl implements ReportService {
 		
 		int population = population(countryName);
 		int secondDosesByCountry = secondDosesByCountry(countryName);
-		double populationVaccinated = ((double) secondDosesByCountry / population) * 100;
+		return ((double) secondDosesByCountry / population) * 100;
 		
-		return populationVaccinated;
 	}
 
-	@Scheduled(cron = "0 0 12 * * ?")
+	@Scheduled(cron = "0 10 * * * ?")
 	@Override
 	public void addPopulationEUVaccinatedInBD() {
 		
