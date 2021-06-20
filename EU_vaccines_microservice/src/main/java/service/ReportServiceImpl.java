@@ -82,7 +82,7 @@ public class ReportServiceImpl implements ReportService {
 						.collect(Collectors.toList());
 	}
 	
-	@Scheduled(cron = "0 10 * * * ?")
+	@Scheduled(cron = "0 12 * * * ?")
 	@Override
 	public void addVaccineNamesInBD() {
 		
@@ -163,7 +163,7 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 	
-	@Scheduled(cron = "0 10 * * * ?")
+	@Scheduled(cron = "0 12 * * * ?")
 	@Override
 	public void addCountriesNamesInBD() {
 		
@@ -195,7 +195,7 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 
-	@Scheduled(cron = "0 10 * * * ?")
+	@Scheduled(cron = "0 12 * * * ?")
 	@Override
 	public void addPopulationEUVaccinatedInBD() {
 		

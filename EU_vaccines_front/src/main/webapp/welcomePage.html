@@ -69,7 +69,9 @@
 		window.setInterval(function(){
 	    	var today = new Date();
 		    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-		    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		    var minutes = today.getMinutes() < 10 ? 0 + "" + today.getMinutes(): today.getMinutes();
+		    var seconds = today.getSeconds() < 10 ? 0 + "" + today.getSeconds(): today.getSeconds();
+		    var time = today.getHours() + ":" + minutes + ":" + seconds;
 		    var dateTime = date + ' ' + time;
 		    document.getElementById('date-time').innerHTML = dateTime;
 		}, 1000);
@@ -82,8 +84,10 @@
 			
 			window.setInterval(function(){
 				var today = new Date();
-			    date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-			    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+			    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+			    var minutes = today.getMinutes() < 10 ? 0 + "" + today.getMinutes(): today.getMinutes();
+			    var seconds = today.getSeconds() < 10 ? 0 + "" + today.getSeconds(): today.getSeconds();
+			    var time = today.getHours() + ":" + minutes + ":" + seconds;
 			    var dateTime = date + ' ' + time;
 			    document.getElementById('date-time').innerHTML = dateTime;
 			}, 1);
